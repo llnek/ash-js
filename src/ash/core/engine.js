@@ -113,9 +113,11 @@ define([
         },
 
         update : function( time ) {
+          var rc;
             this.updating = true;
             for( var system = this.systemList.head; system; system = system.next ) {
-                system.update( time );
+                rc=system.update( time );
+                if (rc===false) { break; }
             }
             this.updating = false;
             this.updateComplete.dispatch();
